@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   patch '/change-password' => 'users#changepw'
 
   post '/search-beer' => 'beers#search_beer'
+  post '/get-beer' => 'beers#fetch_beer'
 end

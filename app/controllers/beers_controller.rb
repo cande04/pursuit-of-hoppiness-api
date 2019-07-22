@@ -46,7 +46,12 @@ class BeersController < ProtectedController
   # GET from brewerydb search
   def search_beer
     search_beer = params.require(:searchBeer)
-    render json: HTTParty.get("https://sandbox-api.brewerydb.com/v2/search/?key=0576184734503e9f155dc843e0c48342&type=beer&q=#{search_beer}")
+    render json: HTTParty.get("https://sandbox-api.brewerydb.com/v2/search/?key=0576184734503e9f155dc843e0c48342&type=beer&withBreweries=Y&q=#{search_beer}")
+  end
+
+  def fetch_beer
+    beer_db_id = params.require(:beer_id)
+    render json: HTTParty.get("https://sandbox-api.brewerydb.com/v2/beer/#{beer_db_id}?key=0576184734503e9f155dc843e0c48342&withBreweries=Y")
   end
 
   private
