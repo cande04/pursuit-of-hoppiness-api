@@ -1,9 +1,14 @@
-class BeersController < ApplicationController
-  before_action :set_beer, only: [:show, :update, :destroy]
+# frozen_string_literal: true
+
+require 'httparty'
+
+class BeersController < ProtectedController
+  before_action :set_beer, only: %i[show update destroy]
+  skip_before_action :authenticate, only: %i[search_beer]
 
   # GET /beers
   def index
-    @beers = Beer.all
+    @beers = current_user.beers
 
     render json: @beers
   end
@@ -15,7 +20,7 @@ class BeersController < ApplicationController
 
   # POST /beers
   def create
-    @beer = Beer.new(beer_params)
+    @beer = current_user.beers.build(beer_params)
 
     if @beer.save
       render json: @beer, status: :created, location: @beer
@@ -38,14 +43,23 @@ class BeersController < ApplicationController
     @beer.destroy
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_beer
-      @beer = Beer.find(params[:id])
-    end
+  # GET from brewerydb search
+  def search_beer
+    search_beer = params.require(:searchBeer)
+    render json: HTTParty.get("https://sandbox-api.brewerydb.com/v2/search/?key=0576184734503e9f155dc843e0c48342&type=beer&q=#{search_beer}")
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def beer_params
-      params.require(:beer).permit(:name, :style, :abv, :description, :brewery, :brewery_location, :rating, :review)
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_beer
+    @beer = current_user.beers.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def beer_params
+    params.require(:beer).permit(:name, :style, :abv, :description, :brewery, :brewery_location, :rating, :review)
+  end
+
+  private :set_beer, :beer_params
 end

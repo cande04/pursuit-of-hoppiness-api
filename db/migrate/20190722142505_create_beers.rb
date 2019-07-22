@@ -9,6 +9,7 @@ class CreateBeers < ActiveRecord::Migration[5.2]
       t.string :brewery_location
       t.integer :rating
       t.string :review
+      t.references :user, foreign_key: true
 
       t.timestamps
     end

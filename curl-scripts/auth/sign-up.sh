@@ -1,5 +1,8 @@
 #!/bin/bash
 
+EMAIL='cna@test'
+PASSWORD='a'
+
 curl "http://localhost:4741/sign-up" \
   --include \
   --request POST \
