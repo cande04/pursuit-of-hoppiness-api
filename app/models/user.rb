@@ -3,4 +3,5 @@
 class User < ApplicationRecord
   include Authentication
   has_many :beers
+  has_many :breweries
 end
