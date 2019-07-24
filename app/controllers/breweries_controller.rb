@@ -46,6 +46,11 @@ class BreweriesController < ProtectedController
     puts("apikey: #{ENV["YELP_API_KEY"]}")
   end
 
+  def fetch_brewery
+    brewery_db_id = params.require(:breweryId)
+    render json: HTTParty.get("https://api.yelp.com/v3/businesses/#{brewery_db_id}", :headers => { "Authorization" => "Bearer BYMafyqzCQkJhfTPrbLBOs6G3-j4gj3KBoPF5UPhcz-MBkDp0jnixEW6DoFYN0BhefpcpOF7KgyYXal86ilUPJVxYpsC36oWzj2N1RXL4vrD65EOT1JFnIot4lg3XXYx"})
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
