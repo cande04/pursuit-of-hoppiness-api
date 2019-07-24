@@ -60,7 +60,7 @@ class BreweriesController < ProtectedController
 
   # Only allow a trusted parameter "white list" through.
   def brewery_params
-    params.require(:brewery).permit(:name, :location, :rating, :review)
+    params.require(:brewery).permit(:name, :location, :rating, :review, :image_url)
   end
 
   private :set_brewery, :brewery_params
