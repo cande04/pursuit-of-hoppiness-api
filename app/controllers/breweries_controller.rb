@@ -42,14 +42,27 @@ class BreweriesController < ProtectedController
   # GET from yelp search
   def search_breweries
     search_breweries = params.require(:searchBreweries)
-    render json: HTTParty.get("https://api.yelp.com/v3/businesses/search?limit=50&categories=breweries&location=#{search_breweries}", :headers => { "Authorization" => "Bearer BYMafyqzCQkJhfTPrbLBOs6G3-j4gj3KBoPF5UPhcz-MBkDp0jnixEW6DoFYN0BhefpcpOF7KgyYXal86ilUPJVxYpsC36oWzj2N1RXL4vrD65EOT1JFnIot4lg3XXYx"})
+    render json: HTTParty.get("https://api.yelp.com/v3/businesses/search?limit=50&categories=breweries&location=#{search_breweries}", :headers => { "Authorization" => "Bearer #{ENV["YELP_API"]}"})
     puts("apikey: #{ENV["YELP_API_KEY"]}")
   end
 
+  # def breweries_by_name
+  #   params.require(:breweryInfo).permit(:breweryName, :searchBreweries)
+  #   # breweries_by_name = params.require(:breweryName)
+  #   # search_breweries = params.require(:searchBreweries)
+  #   render json: HTTParty.get("https://api.yelp.com/v3/businesses/search?limit=50&categories=breweries&location=#{:searchBreweries}&term=#{:breweryName}", :headers => { "Authorization" => "Bearer #{ENV["YELP_API"]}"})
+  #   puts("apikey: #{ENV["YELP_API_KEY"]}")
+  # end
+
   def fetch_brewery
     brewery_db_id = params.require(:breweryId)
-    render json: HTTParty.get("https://api.yelp.com/v3/businesses/#{brewery_db_id}", :headers => { "Authorization" => "Bearer BYMafyqzCQkJhfTPrbLBOs6G3-j4gj3KBoPF5UPhcz-MBkDp0jnixEW6DoFYN0BhefpcpOF7KgyYXal86ilUPJVxYpsC36oWzj2N1RXL4vrD65EOT1JFnIot4lg3XXYx"})
+    render json: HTTParty.get("https://api.yelp.com/v3/businesses/#{brewery_db_id}", :headers => { "Authorization" => "Bearer #{ENV["YELP_API"]}"})
   end
+
+  # def fetch_brewery_reviews
+  #   brewery_db_id = params.require(:breweryId)
+  #   render json: HTTParty.get("https://api.yelp.com/v3/businesses/#{brewery_db_id}/reviews", :headers => { "Authorization" => "Bearer BYMafyqzCQkJhfTPrbLBOs6G3-j4gj3KBoPF5UPhcz-MBkDp0jnixEW6DoFYN0BhefpcpOF7KgyYXal86ilUPJVxYpsC36oWzj2N1RXL4vrD65EOT1JFnIot4lg3XXYx"})
+  # end
 
   private
 

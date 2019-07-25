@@ -17,4 +17,6 @@ Rails.application.routes.draw do
 
   post '/search-breweries' => 'breweries#search_breweries'
   post '/get-brewery' => 'breweries#fetch_brewery'
+  # post '/search-for-brewery' => 'breweries#breweries_by_name'
+  # post '/see-reviews' => 'breweries#fetch_brewery_reviews'
 end
