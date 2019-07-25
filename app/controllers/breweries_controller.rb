@@ -43,7 +43,6 @@ class BreweriesController < ProtectedController
   def search_breweries
     search_breweries = params.require(:searchBreweries)
     render json: HTTParty.get("https://api.yelp.com/v3/businesses/search?limit=50&categories=breweries&location=#{search_breweries}", :headers => { "Authorization" => "Bearer #{ENV["YELP_API"]}"})
-    puts("apikey: #{ENV["YELP_API_KEY"]}")
   end
 
   # def breweries_by_name
