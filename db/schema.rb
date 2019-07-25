@@ -24,9 +24,9 @@ ActiveRecord::Schema.define(version: 2019_07_24_151735) do
     t.string "brewery_location"
     t.integer "rating"
     t.string "review"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
     t.index ["user_id"], name: "index_beers_on_user_id"
   end
 
