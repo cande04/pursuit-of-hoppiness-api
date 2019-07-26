@@ -7,7 +7,7 @@ Pursuit of Hoppiness is a beer and brewery tracker. You can search for a specifi
 - repo: https://github.com/cande04/pursuit-of-hoppiness-client
 - deployed site: https://cande04.github.io/pursuit-of-hoppiness-client/#/
 
-## List of Front End Technologies
+## List of Back End Technologies
 - PostgreSQL
 - Ruby on Rails
 
